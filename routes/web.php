@@ -1,18 +1,18 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoutineFormController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
+
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/form', [RoutineFormController::class, 'index'])->name('form');
+Route::post('/dept', [RoutineFormController::class, 'dept'])->name('department.fetch');
+Route::post('/shift', [RoutineFormController::class, 'shift']);
+Route::post('/session', [RoutineFormController::class, 'session']);
