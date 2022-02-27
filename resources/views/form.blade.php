@@ -44,62 +44,74 @@
                     <label class="col-md-3 form-control-label text-uppercase">Batch</label>
                     <div class="col-md-12" id="batch">
                       <label class="checkbox-inline mx-2">
-                        <input id="inlineCheckbox1"  type="checkbox" value="option1"> E-71
+                        <input id="inlineCheckbox1"  type="checkbox" value="option1"> test
                       </label>
                       <label class="checkbox-inline mx-2">
-                        <input id="inlineCheckbox1" type="checkbox" value="option1"> a
+                        <input id="inlineCheckbox1" type="checkbox" value="option1"> test1
                       </label>
                       <label class="checkbox-inline mx-2">
-                        <input id="inlineCheckbox1" type="checkbox" value="option1"> a
-                      </label>
-                      <label class="checkbox-inline mx-2">
-                        <input id="inlineCheckbox2" type="checkbox" value="option2"> b
-                      </label>
-                      <label class="checkbox-inline mx-2">
-                        <input id="inlineCheckbox3" type="checkbox" value="option3"> c
+                        <input id="inlineCheckbox1" type="checkbox" value="option1"> test2
                       </label>
                     </div>              
                 </div>
                 <div class="form-group col-lg-12">
                     <label class="col-md-3 form-control-label text-uppercase">Teacher</label>
-                    <div class=" select mb-3">
-                      <select name="teacher" id="teacher" class="form-control" data-dependent="subject">
-                        <option>--- Select ---</option>
-                      </select>
-                    </div>              
+                    <div class="col-md-12" id="batch">
+                      <label class="checkbox-inline mx-2">
+                        <input id="inlineCheckbox1"  type="checkbox" value="option1"> test
+                      </label>
+                      <label class="checkbox-inline mx-2">
+                        <input id="inlineCheckbox1" type="checkbox" value="option1"> test1
+                      </label>
+                      <label class="checkbox-inline mx-2">
+                        <input id="inlineCheckbox1" type="checkbox" value="option1"> test2
+                      </label>
+                    </div>               
                 </div>
-                <div class="form-group col-lg-6">
+                <div class="form-group col-lg-12">
                     <label class="col-md-3 form-control-label text-uppercase">Subject</label>
-                    <div class=" select mb-3">
-                      <select name="account" class="form-control">
-                        <option>--- Select ---</option>
-                        <option>1st Shift</option>
-                        <option>2nd Shift</option>
-                      </select>
-                    </div>              
+                    <div class="col-md-12" id="batch">
+                      <label class="checkbox-inline mx-2">
+                        <input id="inlineCheckbox1"  type="checkbox" value="option1"> test
+                      </label>
+                      <label class="checkbox-inline mx-2">
+                        <input id="inlineCheckbox1" type="checkbox" value="option1"> test1
+                      </label>
+                      <label class="checkbox-inline mx-2">
+                        <input id="inlineCheckbox1" type="checkbox" value="option1"> test2
+                      </label>
+                    </div>               
                 </div>
-                <div class="form-group col-lg-6">
+                <div class="form-group col-lg-12">
                     <label class="col-md-6 form-control-label text-uppercase">Class Room</label>
-                    <div class=" select mb-3">
-                      <select name="account" class="form-control">
-                        <option>--- Select ---</option>
-                        <option>1st Shift</option>
-                        <option>2nd Shift</option>
-                      </select>
-                    </div>              
+                    <div class="col-md-12" id="batch">
+                      <label class="checkbox-inline mx-2">
+                        <input id="inlineCheckbox1"  type="checkbox" value="option1"> test
+                      </label>
+                      <label class="checkbox-inline mx-2">
+                        <input id="inlineCheckbox1" type="checkbox" value="option1"> test1
+                      </label>
+                      <label class="checkbox-inline mx-2">
+                        <input id="inlineCheckbox1" type="checkbox" value="option1"> test2
+                      </label>
+                    </div>                
                 </div>
                 <div class="form-group col-lg-12">
                     <label class="col-md-6 form-control-label text-uppercase">Lab Room</label>
-                    <div class=" select mb-3">
-                      <select name="account" class="form-control">
-                        <option>--- Select ---</option>
-                        <option>1st Shift</option>
-                        <option>2nd Shift</option>
-                      </select>
-                    </div>              
+                    <div class="col-md-12" id="batch">
+                      <label class="checkbox-inline mx-2">
+                        <input id="inlineCheckbox1"  type="checkbox" value="option1"> test
+                      </label>
+                      <label class="checkbox-inline mx-2">
+                        <input id="inlineCheckbox1" type="checkbox" value="option1"> test1
+                      </label>
+                      <label class="checkbox-inline mx-2">
+                        <input id="inlineCheckbox1" type="checkbox" value="option1"> test2
+                      </label>
+                    </div>             
                 </div>
                 <div class="form-group col-md-12 ">
-                  <div class="ml-auto">
+                  <div class="pl-3 ml-auto">
                     <button type="submit" class="btn btn-primary">Save</button>
                   </div>
                 </div>
