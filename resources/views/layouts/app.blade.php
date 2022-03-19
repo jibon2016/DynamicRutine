@@ -91,9 +91,9 @@
                 <li class="sidebar-list-item"><a href="{{ route('home') }}" class="sidebar-link text-muted @if($manu == 'Home') active @endif"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
 
                 <li class="sidebar-list-item">
-                    <a href="{{ route('form') }}" class="sidebar-link text-muted @if($manu == 'Form') active @endif"><i class="o-survey-1 mr-3 text-gray"></i><span>Forms</span></a></li>
+                    <a href="{{ route('form') }}" class="sidebar-link text-muted @if($manu == 'Form') active @endif"><i class="o-survey-1 mr-3 text-gray"></i><span>Create Routine</span></a></li>
 
-            <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Pages</span></a>
+            <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Routine</span></a>
                 <div id="pages" class="collapse">
                 <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
                     <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted pl-lg-5">Page one</a></li>
@@ -106,10 +106,12 @@
             </ul>
             <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">EXTRAS</div>
             <ul class="sidebar-menu list-unstyled">
-                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Demo</span></a></li>
-                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>Demo</span></a></li>
-                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Demo</span></a></li>
-                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Demo</span></a></li>
+                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Department</span></a></li>
+                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>Batch</span></a></li>
+                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Subject</span></a></li>
+                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Teacher</span></a></li>
+                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Class Room</span></a></li>
+                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Lab Room</span></a></li>
             </ul>
         </div>
         @yield('content')

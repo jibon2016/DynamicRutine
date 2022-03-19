@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Batch;
+use App\Models\ClassRoom;
 use App\Models\Department;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class RoutineFormController extends Controller
@@ -22,13 +24,13 @@ class RoutineFormController extends Controller
     public function dept(Request $request){
         $shift =  
             [
-            0 =>[
-                "id" => 1,
-                "shift" => '1st Shift',
-            ],
-            1 =>[
-                "id" => 2,
-                "shift" => '2nd Shift',
+                0 =>[
+                    "id" => 1,
+                    "shift" => '1st Shift',
+                ],
+                1 =>[
+                    "id" => 2,
+                    "shift" => '2nd Shift',
             ]
         ];
         $html = '<option value ="0"> ---Select '.$request->dependent.' ---</option>';
@@ -63,7 +65,16 @@ class RoutineFormController extends Controller
                     ->where('shift_id', $shift)
                     ->where('active_status', 1)
                     ->get();
+        $teacher = Teacher::where('department_id', $dept)
+                    ->where('active_status', 1)
+                    ->get();
+        $class =    ClassRoom::where('active_status', 1)
+                    ->where('theory_or_lab','theory')
+                    ->get();
+        $lab =    ClassRoom::where('active_status', 1)
+                    ->where('theory_or_lab','lab')
+                    ->get();
 
-        return response()->json(['batch' => $batch]);
+        return response()->json(['batch' => $batch, 'teacher'=> $teacher, 'class' => $class, 'lab' => $lab]);
     }
 }

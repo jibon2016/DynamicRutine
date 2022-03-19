@@ -4,10 +4,15 @@ $(document).ready(function(){
   $('#department').change(function(){
     if($(this).val() != '')
     {
+      // Chang Session Value
+      $('#session').html('<option>--- Select ---</option>')
+      
       let select =  $(this).attr("id");
       let value = $(this).val();
       let dependent = $(this).data('dependent');
       let _token = $('input[name="_token"]').val();
+
+
       $.ajax({
         url: '/dept',
         type:'post',
@@ -27,6 +32,7 @@ $(document).ready(function(){
   $('#shift').change(function(){
     if($(this).val() != '')
     {
+
       let select =  $(this).attr("id");
       let value = $(this).val();
       let dependent = $(this).data('dependent');
@@ -71,13 +77,36 @@ $(document).ready(function(){
         },
         success:function(result){
           console.log(result.batch);
-          let html = "";
+          let batch_html = "";
+          let teacher_html = "";
+          let class_html = "";
+          let lab_html = "";
           let batch = result.batch;
+          let teacher = result.teacher;
+          let classRoom = result.class;
+          let lab = result.lab;
+
           for (let e in batch){
-            html += '<label class="checkbox-inline mx-2"><input class="mx-1" id="inlineCheckbox1"'+ batch[e].active_status +' type="checkbox" value="option1">'+ batch[e].name  + '</label>';
+            let active_status = batch[e].active_status === 1 ? "checked":"";
+            batch_html += '<label class="checkbox-inline mx-2"><input class="mx-1" name="batch[]" value="'+batch[e].name +'" id="inlineCheckbox1" '+ active_status + ' type="checkbox" value="option1">'+ batch[e].name  + '</label>';
           };
-          console.log(html);
-          $('#'+dependent).html(html);
+          for (let e in teacher){
+            let active_status = teacher[e].active_status === 1 ? "checked":"";
+            teacher_html += '<label class="checkbox-inline mx-2"><input class="mx-1"  name="teacher[]" value="'+teacher[e].name +'" id="inlineCheckbox1"'+ active_status +' type="checkbox" value="option1">'+ teacher[e].name  + '</label>';
+          };
+          for (let e in classRoom){
+            let active_status = classRoom[e].active_status === 1 ? "checked":"";
+            class_html += '<label class="checkbox-inline mx-2"><input class="mx-1" name="classRoom[]" value="'+classRoom[e].room_no +'" id="inlineCheckbox1"'+ active_status +' type="checkbox" value="option1">'+ classRoom[e].room_no  + '</label>';
+          };
+          for (let e in lab){
+            let active_status = lab[e].active_status === 1 ? "checked":"";
+            lab_html += '<label class="checkbox-inline mx-2"><input class="mx-1" name="lab[]" value="'+lab[e].room_no +'" id="inlineCheckbox1"'+ active_status +' type="checkbox" value="option1">'+ lab[e].room_no  + '</label>';
+          };
+          console.log(batch_html);
+          $('#'+dependent).html(batch_html);
+          $('#teacher').html(teacher_html);
+          $('#class').html(class_html);
+          $('#lab').html(lab_html);
         }
       })
     }

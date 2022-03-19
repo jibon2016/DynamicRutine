@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CreateRoutineController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoutineFormController;
 use Illuminate\Support\Facades\Auth;
@@ -16,3 +17,4 @@ Route::get('/form', [RoutineFormController::class, 'index'])->name('form');
 Route::post('/dept', [RoutineFormController::class, 'dept'])->name('department.fetch');
 Route::post('/shift', [RoutineFormController::class, 'shift']);
 Route::post('/session', [RoutineFormController::class, 'session']);
+Route::post('/createRoutine', [CreateRoutineController::class, 'createRoutine']);

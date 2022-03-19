@@ -11,7 +11,7 @@
               <h3 class="h6 text-uppercase mb-0">Create Routine</h3>
             </div>
             <div class="card-body ">
-              <form class="form-horizontal row ">
+              <form action="{{ url('createRoutine') }}" method="POST" class="form-horizontal row ">
                 {{ csrf_field() }}
                 <div class="form-group col-md-12">
                     <label class="col-md-3 form-control-label text-uppercase">Select Department</label>
@@ -56,21 +56,7 @@
                 </div>
                 <div class="form-group col-lg-12">
                     <label class="col-md-3 form-control-label text-uppercase">Teacher</label>
-                    <div class="col-md-12" id="batch">
-                      <label class="checkbox-inline mx-2">
-                        <input id="inlineCheckbox1"  type="checkbox" value="option1"> test
-                      </label>
-                      <label class="checkbox-inline mx-2">
-                        <input id="inlineCheckbox1" type="checkbox" value="option1"> test1
-                      </label>
-                      <label class="checkbox-inline mx-2">
-                        <input id="inlineCheckbox1" type="checkbox" value="option1"> test2
-                      </label>
-                    </div>               
-                </div>
-                <div class="form-group col-lg-12">
-                    <label class="col-md-3 form-control-label text-uppercase">Subject</label>
-                    <div class="col-md-12" id="batch">
+                    <div class="col-md-12" id="teacher">
                       <label class="checkbox-inline mx-2">
                         <input id="inlineCheckbox1"  type="checkbox" value="option1"> test
                       </label>
@@ -84,7 +70,7 @@
                 </div>
                 <div class="form-group col-lg-12">
                     <label class="col-md-6 form-control-label text-uppercase">Class Room</label>
-                    <div class="col-md-12" id="batch">
+                    <div class="col-md-12" id="class">
                       <label class="checkbox-inline mx-2">
                         <input id="inlineCheckbox1"  type="checkbox" value="option1"> test
                       </label>
@@ -98,7 +84,7 @@
                 </div>
                 <div class="form-group col-lg-12">
                     <label class="col-md-6 form-control-label text-uppercase">Lab Room</label>
-                    <div class="col-md-12" id="batch">
+                    <div class="col-md-12" id="lab">
                       <label class="checkbox-inline mx-2">
                         <input id="inlineCheckbox1"  type="checkbox" value="option1"> test
                       </label>
