@@ -15,10 +15,13 @@ class CreateSubjectsTable extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('teacher_id')->unsigned();
-            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->foreignId('department_id')->unsigned();
+            $table->foreign('department_id')->references('id')->on('departments');
             $table->string('course_name');
             $table->string('course_code');
+            $table->string('course_cradit');
+            $table->string('semister');
+            $table->string('theory_or_lab');
             $table->tinyInteger('active_status')->default(0);
             $table->timestamps();
         });

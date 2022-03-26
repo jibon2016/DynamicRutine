@@ -10,7 +10,7 @@
             <div class="flex-grow-1 d-flex align-items-center">
                 <div class="dot mr-3 bg-violet"></div>
                 <div class="text">
-                <h6 class="mb-0">Total Department</h6><span class="text-gray">145,14 GB</span>
+                <h6 class="mb-0">Total Department</h6><span class="text-gray">4+</span>
                 </div>
             </div>
             <div class="icon text-white bg-violet"><i class="fas fa-server"></i></div>
@@ -21,7 +21,7 @@
             <div class="flex-grow-1 d-flex align-items-center">
                 <div class="dot mr-3 bg-green"></div>
                 <div class="text">
-                <h6 class="mb-0">Total Batch</h6><span class="text-gray">32</span>
+                <h6 class="mb-0">Total Batch</h6><span class="text-gray">32+</span>
                 </div>
             </div>
             <div class="icon text-white bg-green"><i class="far fa-clipboard"></i></div>
@@ -32,7 +32,7 @@
             <div class="flex-grow-1 d-flex align-items-center">
                 <div class="dot mr-3 bg-blue"></div>
                 <div class="text">
-                <h6 class="mb-0">Total Subject</h6><span class="text-gray">400</span>
+                <h6 class="mb-0">Total Subject</h6><span class="text-gray">400+</span>
                 </div>
             </div>
             <div class="icon text-white bg-blue"><i class="fa fa-dolly-flatbed"></i></div>
@@ -43,7 +43,7 @@
             <div class="flex-grow-1 d-flex align-items-center">
                 <div class="dot mr-3 bg-red"></div>
                 <div class="text">
-                <h6 class="mb-0">Total Teacher</h6><span class="text-gray">123</span>
+                <h6 class="mb-0">Total Teacher</h6><span class="text-gray">123+</span>
                 </div>
             </div>
             <div class="icon text-white bg-red"><i class="fas fa-receipt"></i></div>
@@ -54,7 +54,7 @@
             <div class="flex-grow-1 d-flex align-items-center">
                 <div class="dot mr-3 bg-red"></div>
                 <div class="text">
-                <h6 class="mb-0">Total Class Room</h6><span class="text-gray">123</span>
+                <h6 class="mb-0">Total Class Room</h6><span class="text-gray">123+</span>
                 </div>
             </div>
             <div class="icon text-white bg-red"><i class="fas fa-receipt"></i></div>
