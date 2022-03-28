@@ -11,7 +11,7 @@ use Illuminate\Support\Arr;
 class CreateRoutineController extends Controller
 {
     public function createRoutine (Request $request){
-        $priod = array(
+        $priods = array(
             "1st" => "09:00-10:20",
             "2nd" => "10:20-11:50",
             "3rd" => "11:50-12:50",
@@ -26,12 +26,12 @@ class CreateRoutineController extends Controller
         $classRooms = $request->classRoom;
         $lab        = $request->lab;
 
+        
         //Loop all Batchs
         foreach($batchs as $batch){
-
             //what is the running semister of the batch
             $dbBatch = Batch::where('name', $batch)->first();
-            $run_semister = $dbBatch->running_semister;
+            echo $run_semister = $dbBatch->running_semister;
 
             //how many subject of this semister
             $subjects = Subject::where('department_id', $dept)
@@ -40,17 +40,36 @@ class CreateRoutineController extends Controller
                         ->get();
 
             //Create Unique Random Week and random Classroom
-                static $week = [];
+                //filter Lab class
+                $week = [];
                 $total_day = count($week);
+                $total_lab_sub = $subjects->where('theory_or_lab', 'lab')->count();
+                // echo $new1 = $total_day + ($total_lab_sub/2);
+                
+                    for ($i=2; $total_day <= $total_lab_sub; $i++ ) { 
+                        if($total_day<=4){
+                            array_push($week, $this->generateRandomDay());
+                            $week = array_unique($week);
+                            $total_day  = count($week);
+                        }
+                    }
+                //filter theory Class
+                
                 $total_sub = $subjects->where('theory_or_lab', 'theory')->count();
                 for ($i=1; $total_sub > $total_day; $i++) { 
                     $days[]     = $this->generateRandomDay();
                     $week       = array_unique($days);
                     $total_day  = count($week);
+                    if ($total_day == 4) {
+                        break;
+                    }
                 }
 
+
+                // fixed a class room for this batch 
+
                 $key = array_rand($classRooms);
-                echo $this_batch_classRoom = $classRooms[$key];
+                $this_batch_classRoom = $classRooms[$key];
                 unset($classRooms[$key]);
                 $classRooms = array_values($classRooms);
                 
@@ -65,14 +84,7 @@ class CreateRoutineController extends Controller
 
             }
 
-
-            $allTheorySub =  $subjects->where('theory_or_lab', 'theory')->pluck('course_code');
-            $allTheorySub = $allTheorySub->all();
-            $key1 = array_rand($allTheorySub);
-            echo $allTheorySub[$key1];
-            echo $run_semister;
-
-            $htmlTable= '
+            $htmlTableHead= '
             <table border="1">
                 <thead>
                     <tr>
@@ -90,22 +102,52 @@ class CreateRoutineController extends Controller
                         <td>2<sup>nd</sup></td>
                         <td>3<sup>rd</sup></td>
                         <td>4<sup>th</sup></td>
-                    </tr>
-                    <tr>
-                    
-                        <td>'. $week[0] .' </td>
-                        <td>'. $priod['1st'] = $allTheorySub[$key1] .'</td>
-                        <td>'. $priod['2nd'] = $allTheorySub[$key1] .'</td>
-                        <td>'. $priod['3rd'] = "Break" .'</td>
-                        <td>'. $priod['4th'] = $allTheorySub[$key1] .'</td>
-                    </tr>
-                </tbody>
+                    </tr>';
+
+                $htmlTableFoot = '</tbody>
             </table>';
-            break;
+            $htmlTableMiddle = "";
+                $allTheorySub =  $subjects->where('theory_or_lab', 'theory')->pluck('course_code');
+                $allTheorySub = $allTheorySub->all();
+                echo "<pre>";
+                // print_r($allTheorySub);
+                foreach ($week as $key => $day) {
+                    $htmlTableMiddle .= '<tr><td>'. $day.' </td>';
+                    foreach ($priods as $key => $priod) {
+                        if ($key == '3rd') {
+                            $htmlTableMiddle .='<td>'.  "Break" .'</td>';
+                            continue;
+                        }
+                        if(empty($allTheorySub)){
+                            continue;
+                        }
+                        $key1           = array_rand($allTheorySub);
+                        $priod_sub[]    = $allTheorySub[$key1];
+                        $new            = array_count_values($priod_sub);
+                        
+                        if (count($priod_sub) <= 15  ) {
+                            $htmlTableMiddle .= '<td>'. $allTheorySub[$key1] .'</td>';
+                        }
+                        if ($new[$allTheorySub[$key1]] >= 2) {
+                            unset($allTheorySub[$key1]);
+                        }
+
+                    }
+                    $htmlTableMiddle .= '</tr>';
+                    
+                }
+                // print_r($priod_sub);
+            
+            echo $htmlTable = $htmlTableHead. $htmlTableMiddle. $htmlTableFoot;
+            echo '<br>';
+            foreach ($allTheorySub as $i => $value) {
+                unset($allTheorySub[$i]);
+            }
+            foreach ($priod_sub as $i => $value) {
+                unset($priod_sub[$i]);
+            }
         }
-        
-        echo $htmlTable;
-        print_r($week);
+    
     }
 
 

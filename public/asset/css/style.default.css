@@ -4189,8 +4189,3 @@ code {
 .dropdown-item.disabled, .dropdown-item:disabled {
   color: #6c757d;
 }
-
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
