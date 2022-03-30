@@ -44,6 +44,7 @@ class CreateRoutineController extends Controller
                 $week = [];
                 $total_day = count($week);
                 $total_lab_sub = $subjects->where('theory_or_lab', 'lab')->count();
+                
                 // echo $new1 = $total_day + ($total_lab_sub/2);
                 
                     for ($i=2; $total_day <= $total_lab_sub; $i++ ) { 
