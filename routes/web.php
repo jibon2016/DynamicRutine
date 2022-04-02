@@ -33,4 +33,5 @@ Route::resource('teachers', TeacherController::class);
 
 //Test Routes
 Route::get('/addTeacher', [CreateRoutineController::class, 'addTeacher']);
+Route::get('pdf', [CreateRoutineController::class, 'generatePdf']);
 
