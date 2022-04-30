@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 
@@ -74,5 +75,26 @@ class TeacherController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function addTeacherSub($id, $dept){
+        
+        $this->data['teacher'] = Teacher::find($id);
+        $this->data['subjects'] = Subject::where('department_id',$dept)
+        ->get();
+        return view('teachers.subtech', $this->data);
+    }
+
+    // public function sub_add_tea (Request $request){
+    //     $subject = Subject::where('semister', $request->semister)
+    //     ->where('department_id', $request->dept)
+    //     ->get();
+    //     return response()->json(['subject'=> $subject]);
+// }
+
+    public function add_teacher_sub(Request $request){
+        $teacher = Teacher::find($request->teacher);
+        $teacher->subject()->sync($request->subject);
+        return redirect()->route('teachers.index');
     }
 }

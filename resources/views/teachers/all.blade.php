@@ -18,7 +18,8 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Department</th>
-                    <th>Active</th>
+                    <th>Subject</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -30,7 +31,9 @@
                         <th scope="row">{{ $sl++ }}</th>
                         <td>{{ $teacher->name }}</td>
                         <td>{{ $teacher->department->name }}</td>
+                        <td>{{ $teacher->subject->count() }}</td>
                         <td><span class="badge text-white bg-{{ $teacher->active_status == 1 ? 'success' : 'danger' }}">{{ $teacher->active_status == 1 ? 'Active' : 'Deactive'}}</span></td>
+                        <td><a href="{{ route('addTeacherSub', ['id'=>$teacher->id, 'dept'=> $teacher->department_id]) }}" class="btn btn-primary">Add Subject</a></td>
                       </tr>
                     @endforeach
                   

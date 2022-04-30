@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\App;
 
 class CreateRoutineController extends Controller
 {
+
+
     public function generatePdf()
     {
         // return view('routine.pdf');
@@ -38,12 +40,14 @@ class CreateRoutineController extends Controller
 
         $this->data['batchs'] = $batchs;
         $html = '';
+
         //Loop all Batchs
         foreach($batchs as $batch){
             //what is the running semister of the batch
             $dbBatch = Batch::where('name', $batch)->first();
             $run_semister = $dbBatch->running_semister;
             $this->data['semister'] = $run_semister;
+
             //how many subject of this semister
             $subjects = Subject::where('department_id', $dept)
                         ->where('semister', $run_semister)
@@ -57,7 +61,6 @@ class CreateRoutineController extends Controller
                 $total_lab_sub_count = $subjects->where('theory_or_lab', 'lab')->count();
                 
                 // echo $new1 = $total_day + ($total_lab_sub/2);
-                
                     for ($i=0; $total_day <= $total_lab_sub_count; $i++ ) { 
                         if($total_day<=4){
                             array_push($week, $this->generateRandomDay());
@@ -66,7 +69,6 @@ class CreateRoutineController extends Controller
                         }
                     }
                 //filter theory Class
-                
                 $total_sub = $subjects->where('theory_or_lab', 'theory')->count();
                 for ($i=1; $total_sub >= $total_day; $i++) { 
                     if ($total_day >= 4) {
@@ -91,14 +93,18 @@ class CreateRoutineController extends Controller
             
             
             //Who are the teacher of these subject
+            $subteach = array();
             foreach ($subjects as $subject) {
 
                 foreach($subject->teacher as $teacher){
-                    $subject->course_name . $teacher->name;
+                    $subteach[] = $subject->course_code . $teacher->name;
                 }
 
             }
+            // echo '<pre>';
+            // echo print_r($subteach);
 
+            // Routine Html Table
             $htmlTableHead= '
             <!DOCTYPE html>
             <html lang="en">
@@ -196,7 +202,7 @@ class CreateRoutineController extends Controller
                 ->where('theory_or_lab', 'theory')
                 ->pluck('course_code');
                 $allLabSub =  $subjects->where('semister', $run_semister)
-                ->where('theory_or_lab', 'theory')
+                ->where('theory_or_lab', 'lab')
                 ->pluck('course_code');
                 $allTheorySub   = $allTheorySub->all();
                 $allLabSub      = $allLabSub->all();
@@ -204,14 +210,12 @@ class CreateRoutineController extends Controller
                 // print_r($week);
                     $count = 1;
                 foreach ($week as $key => $day) {
-                    echo $count;
                     if($count == 2 ){
-                        $htmlTableMiddle .= '<tr><td  style="line-height: 70px; margin:70px;">'. $day.' </td>';
+                        $htmlTableMiddle .= '<tr><td>'. $day.' </td>';
                     }else{
                         $htmlTableMiddle .= '<tr><td>'. $day.' </td>';
                     }
-
-
+                    //In day 
                     foreach ($priods as $key => $priod) {
                         if ($key == '3rd') {
                             $htmlTableMiddle .='<td>Break</td>';
@@ -221,16 +225,35 @@ class CreateRoutineController extends Controller
                             $htmlTableMiddle .= '<td></td>';
                             continue;
                         }
-                        $key1           = array_rand($allTheorySub);
-                        $priod_sub[]    = $allTheorySub[$key1];
-                        $new            = array_count_values($priod_sub);
-                        
-                        if (count($priod_sub) <= 15  ) {
-                            $htmlTableMiddle .= '<td>'. $allTheorySub[$key1] .'</td>';
+
+                        if ($count == 2) {
+                            if(empty($allLabSub)){
+                                $htmlTableMiddle .= '<td></td>';
+                                continue;
+                            }
+                            $key2           = array_rand($allLabSub);
+                            $priod_sub[]    = $allLabSub[$key2];
+                            $new1            = array_count_values($priod_sub);
                             
-                        }
-                        if ($new[$allTheorySub[$key1]] >= 2) {
-                            unset($allTheorySub[$key1]);
+                            if (count($priod_sub) <= 15  ) {
+                                $htmlTableMiddle .= '<td>Lab Class<br>'. $allLabSub[$key2] .'</td>';
+                                
+                            }
+                            if ($new1[$allLabSub[$key2]] >= 1) {
+                                unset($allLabSub[$key2]);
+                            }
+                        }else{
+                            $key1           = array_rand($allTheorySub);
+                            $priod_sub[]    = $allTheorySub[$key1];
+                            $new            = array_count_values($priod_sub);
+                            
+                            if (count($priod_sub) <= 15  ) {
+                                $htmlTableMiddle .= '<td>'. $allTheorySub[$key1] .'</td>';
+                                
+                            }
+                            if ($new[$allTheorySub[$key1]] >= 2) {
+                                unset($allTheorySub[$key1]);
+                            }
                         }
                         
                     }
@@ -242,17 +265,20 @@ class CreateRoutineController extends Controller
                     }
                     $count+= 1;
                 }
-                // print_r($priod_sub);
             
             $htmlTable = $htmlTableHead. $htmlTableMiddle. $htmlTableFoot;
             $htmlTable .= '<div class="page-break"></div>';
-            $this->data['table'] = $htmlTable;
-            // echo '<br>';
+
+            
+            //Unset all array
             foreach ($allTheorySub as $i => $value) {
                 unset($allTheorySub[$i]);
             }
             foreach ($priod_sub as $i => $value) {
                 unset($priod_sub[$i]);
+            }
+            foreach ($subteach as $i => $value) {
+                unset($subteach[$i]);
             }
             $html .= $htmlTable;
         }

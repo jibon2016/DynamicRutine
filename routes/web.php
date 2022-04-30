@@ -8,6 +8,7 @@ use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', function () {
     return redirect()->route('home');
 });
@@ -27,8 +28,9 @@ Route::resource('subjects', SubjectController::class);
 
 //Teachers Rouutes
 Route::resource('teachers', TeacherController::class);
-
-
+Route::get('addTeacherSub/{id}/{dept}', [TeacherController::class, 'addTeacherSub'])->name('addTeacherSub');
+Route::post('/sub_add_tea', [TeacherController::class, 'sub_add_tea']);
+Route::post('/addTeacherSub', [TeacherController::class, 'add_teacher_sub']);
 
 
 //Test Routes

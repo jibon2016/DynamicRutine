@@ -110,6 +110,64 @@ $(document).ready(function(){
         }
       })
     }
-  });
+  })
+
+
+
+
+
+  // $('#v-pills-tab').click(function(el){
+  //   var triggerTabList = document.querySelector('#myTab .active').innerHTML;
+  //   // var tabListContent = document.querySelector('#v-pills-tabContent');
+  //   var semister = triggerTabList.slice(0, 4).trim();
+  //   let dept = document.querySelector('#dept').innerHTML;
+  //   let _token =$('meta[name="csrf-token"]').attr('content');
+  //   var array = [];
+
+  //   // tabListContent.innerHTML = '<div class="tab-pane fade show active" id="v-pills-1st" role="tabpanel" aria-labelledby="v-pills-home-tab"><input type="checkbox"  class="mx-1"><label for="">From Js</label></div>';
+
+  //   $.ajax({
+  //       url: '/sub_add_tea',
+  //       type:'post',
+  //       data: {
+  //         semister : semister,
+  //         dept     : dept,
+  //         _token  : _token
+  //       },
+  //       success:function(result){
+  //         let subject = result.subject;
+  //         let subject_html  = '';
+          
+  //         if (!subject.length == 0) {
+  //           for(let e in subject)
+  //           {
+  //               // let active_status = subject[e].active_status === 1 ? "checked":"";
+  //               subject_html += '<div class="tab-pane fade show active" id="v-pills-1st" role="tabpanel" aria-labelledby="v-pills-home-tab"><label><input type="checkbox" value='+ subject[e].id +' class="mx-1">' + subject[e].course_name + '</label></div>';
+  //           }
+  //         }else{
+  //           subject_html = "<p>No Class in this Semister</p>";
+  //         }
+
+  //         $('#v-pills-tabContent').html(subject_html);
+
+  //         $('#v-pills-tabContent').click(function() {
+  //             $('#v-pills-tabContent :checked').each(function() {
+  //               // if(values.indexOf($(this).val()) === -1){
+                  
+  //                 values.push($(this).val());
+  //               // }
+  //             });
+  //             console.log(values); 
+  //         });
+
+            
+  //       }//Success end
+          
+  //     })//Ajax end
+
+  // });//Tab click end
+
+
+
 
 });
