@@ -20,6 +20,7 @@
                     <th>Curse Code</th>
                     <th>Cradit</th>
                     <th>Type</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -33,6 +34,7 @@
                       <td>{{ $subject->course_code }}</td>
                       <td>{{ $subject->course_cradit }}</td>
                       <td>{{ $subject->theory_or_lab }}</td>
+                      <td><a href=" {{ route('subjects.edit', ['subject'=> $subject->id]) }} " class="btn btn-blue text-white"><i class="fa-solid fa-pen-to-square"></i></a></td>
                     </tr>
                     @endforeach
                   

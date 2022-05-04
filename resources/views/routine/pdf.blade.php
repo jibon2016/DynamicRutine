@@ -34,6 +34,7 @@
       margin: 0px;
       margin-left: -10px;
       padding: 0px;
+      width: 100%;
     }
         
     table, tr, th, td {
@@ -54,6 +55,37 @@
     }
     td{
     }
+    .text-left{
+      width: 60%;
+      float: left;
+    }
+    .text-right{
+      width: 40%;
+      float: right;
+      height: 400px;
+    }
+    .font-15{
+      font-size: 16px;
+    }
+    .mark{
+      height: 150px;
+      width: 290px;
+      border: 1px solid #000;
+      padding: 20px;
+    }
+    .center{
+      text-align: center;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+    .sub{
+      float: right;
+      width: 10%;
+    }
+    .per{
+      float: left;
+      width: 90%;
+    } 
   </style>
   </head>
   <body>
@@ -86,5 +118,49 @@
         <td>aksjdf</td>
       </tr>
     </table>
+    <section style="margin-top: 40px;">
+      <div class="text-left">
+        <p><strong>Academic Calender:</strong></p>
+        <p>Class Commencement Date: 00.00.0000</p>
+        <p>Mid-term Exam Date: 00.00.0000</p>
+        <p>Mid-term Retake Date: 00.00.0000</p>
+        <p>Mid-term Result Publishing Date: 00.00.0000</p>
+        <p>Tuition Fee Payment Last Date: 00.00.0000</p>
+        <p>Course Distribution for Next Semester: 00.00.0000 to 00.00.0000</p>
+        <p>Class Closing Date: 00.00.0000</p>
+        <p>Semester Final Exam Date: 00.00.0000 to 00.00.0000</p>
+        <p class="font-15">Routine Distribution for Next Semister: On the date of 2<sup>nd</sup> Course Exam.</p>
+        <p>Result Publish Date: 00.00.0000</p>
+        <p>Tabulation Submission on the Controller office Date: 00.00.0000</p>
+        <p>Semister Break: ************</p>
+        <p>Next Semister Class Start Date: 00.00.0000</p>
+      </div>
+      <div class="text-right">
+        <div class="mark">
+          <p class="center">Mark Distribution:</p>
+          <div class="sub">
+            <p>20%</p>
+            <p>10%</p>
+            <p>10%</p>
+            <p>10%</p>
+            <p>50%</p>
+          </div>
+          <div class="per">
+            <p>Mid-term Exam:</p>
+            <p>Assignment/Class study:</p>
+            <p>Class participation, Presentation:</p>
+            <p>Attendance & Behavior:</p>
+            <p>Semester Final:</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <strong>
+        <p>Web Site: <a href="#">www.diu.ac/Cse</a>, E-mail: students@diu-bd.net</p>
+        <p>Department's Facebook Group Link: Department of CSE, Dhaka Internatioal University</p>
+        <p>(Green Road):<a href="#">https://www.facebook.com/groups/13453453453425/learning_content</a></p>
+      </strong>
+    </section>
   </body>
 </html>

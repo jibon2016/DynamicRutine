@@ -49,7 +49,7 @@ class SubjectController extends Controller
     
     public function show($id)
     {
-        
+    
     }
 
     /**
@@ -60,7 +60,9 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
-        
+        $this->data['departments']  = Department::where('active_status', 1)->get();
+        $this->data['subject']     = Subject::find($id);
+        return view('subjects.edit', $this->data );
     }
 
     /**
@@ -72,7 +74,24 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $subject =  Subject::find($id);
+        $subject->department_id = $request->department_id;
+        $subject->course_name = $request->course_name;
+        $subject->course_code = $request->course_code;
+        $subject->course_cradit = $request->course_cradit;
+        $subject->semister = $request->semister;
+        $subject->active_status = $request->active_status;
+
+        $subject->theory_or_lab = "theory";
+        if($request->active_status == "on"){
+            $subject->active_status = 1;
+        }else{
+            $subject->active_status = 0;
+        }
+        if ($subject->save()) {
+            $msg = "Subject Updated Successfully";;
+        } 
+        return redirect()->route('subjects.index');
     }
 
     /**
