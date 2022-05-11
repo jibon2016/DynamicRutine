@@ -11,6 +11,18 @@
               <h3 class="h6 text-uppercase mb-0">Create Routine</h3>
             </div>
             <div class="card-body ">
+              @if(count($errors) > 0 )
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <ul class="p-0 m-0" style="list-style: none;">
+                    @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                    @endforeach
+                  </ul>
+                </div>
+              @endif
               <form action="{{ url('createRoutine') }}" method="POST" class="form-horizontal row ">
                 {{ csrf_field() }}
                 <div class="form-group col-md-12">

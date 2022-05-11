@@ -87,35 +87,49 @@
         </nav>
         </header>
         <div class="d-flex align-items-stretch">
+        @if (Auth::user()->role == 'admin')
+            <div id="sidebar" class="sidebar py-3">
+                <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MAIN</div>
+                <ul class="sidebar-menu list-unstyled">
+                    <li class="sidebar-list-item"><a href="{{ route('home') }}" class="sidebar-link text-muted @if($manu == 'Home') active @endif"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
+
+                    <li class="sidebar-list-item">
+                        <a href="{{ route('form') }}" class="sidebar-link text-muted @if($manu == 'Form') active @endif"><i class="o-survey-1 mr-3 text-gray"></i><span>Create Routine</span></a></li>
+
+                <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Routine</span></a>
+                    <div id="pages" class="collapse">
+                    <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
+                        <li class="sidebar-list-item"><a href="{{ url('showRoutine') }}" class="sidebar-link text-muted pl-lg-5">2022</a></li>
+                        
+                    </ul>
+                    </div>
+                </li>
+                </ul>
+                <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">EXTRAS</div>
+                <ul class="sidebar-menu list-unstyled">
+                    <li class="sidebar-list-item"><a href="{{ route('subjects.index') }}" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Subject</span></a></li>
+                    <li class="sidebar-list-item"><a href="{{ route('teachers.index') }}" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Teacher</span></a></li>
+                </ul>
+            </div>
+        @endif
+
+        @if (Auth::user()->role == 'teacher')
         <div id="sidebar" class="sidebar py-3">
             <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MAIN</div>
             <ul class="sidebar-menu list-unstyled">
                 <li class="sidebar-list-item"><a href="{{ route('home') }}" class="sidebar-link text-muted @if($manu == 'Home') active @endif"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
 
-                <li class="sidebar-list-item">
-                    <a href="{{ route('form') }}" class="sidebar-link text-muted @if($manu == 'Form') active @endif"><i class="o-survey-1 mr-3 text-gray"></i><span>Create Routine</span></a></li>
-
             <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Routine</span></a>
                 <div id="pages" class="collapse">
                 <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
-                    <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted pl-lg-5">Page one</a></li>
-                    <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted pl-lg-5">Page two</a></li>
-                    <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted pl-lg-5">Page three</a></li>
-                    <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted pl-lg-5">Page four</a></li>
+                    <li class="sidebar-list-item"><a href="/routineTeacher " class="sidebar-link text-muted pl-lg-5">2022</a></li>
                 </ul>
                 </div>
             </li>
             </ul>
-            <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">EXTRAS</div>
-            <ul class="sidebar-menu list-unstyled">
-                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Department</span></a></li>
-                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>Batch</span></a></li>
-                <li class="sidebar-list-item"><a href="{{ route('subjects.index') }}" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Subject</span></a></li>
-                <li class="sidebar-list-item"><a href="{{ route('teachers.index') }}" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Teacher</span></a></li>
-                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Class Room</span></a></li>
-                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Lab Room</span></a></li>
-            </ul>
         </div>
+        @endif
+
         @yield('content')
         </div>
 

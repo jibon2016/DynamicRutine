@@ -28,14 +28,14 @@
                         $sl = 1;
                     @endphp
                     @foreach ($subjects as $subject )
-                  <tr>
-                      <th scope="row">{{ $sl++ }}</th>
-                      <td>{{ $subject->course_name }}</td>
-                      <td>{{ $subject->course_code }}</td>
-                      <td>{{ $subject->course_cradit }}</td>
-                      <td>{{ $subject->theory_or_lab }}</td>
-                      <td><a href=" {{ route('subjects.edit', ['subject'=> $subject->id]) }} " class="btn btn-blue text-white"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                    </tr>
+                      <tr>
+                        <th scope="row">{{ $sl++ }}</th>
+                        <td>{{ $subject->course_name }}</td>
+                        <td>{{ $subject->course_code }}</td>
+                        <td>{{ $subject->course_cradit }}</td>
+                        <td>{{ $subject->theory_or_lab }}</td>
+                        <td><a href=" {{ route('subjects.edit', ['subject'=> $subject->id]) }} " class="btn btn-blue text-white"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                      </tr>
                     @endforeach
                   
                 </tbody>

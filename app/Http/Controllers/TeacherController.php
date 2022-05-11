@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\Routine;
 use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
 {
@@ -96,5 +98,18 @@ class TeacherController extends Controller
         $teacher = Teacher::find($request->teacher);
         $teacher->subject()->sync($request->subject);
         return redirect()->route('teachers.index');
+    }
+    
+    public function routineTeacher(){
+        if(Auth::user()->role == 'teacher'){
+            $this->data['manu'] = 'Home';
+            $teacher = Teacher::where('name', Auth::user()->name)->first();
+            $this->data['routines'] = Routine::where('year', 2022 )
+                                            ->where('teacher_id', $teacher->id)
+                                            ->where('admin_aprove', 1)
+                                            ->get();
+                                            
+            return view('teachers.showRoutine', $this->data);
+        }
     }
 }
