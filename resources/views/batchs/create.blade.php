@@ -8,11 +8,11 @@
         <div class="col-lg-12 mb-5">
           <div class="card">
             <div class="card-header d-flex justify-content-between">
-                <h6 class="text-uppercase mb-0">Create Subjects</h6>
-                <a href="{{ route('subjects.index') }}" class="btn btn-blue text-white justify-content-end"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                <h6 class="text-uppercase mb-0">Create Batch</h6>
+                <a href="{{ route('batchs.index') }}" class="btn btn-blue text-white justify-content-end"><i class="fa-solid fa-arrow-left"></i> Back</a>
             </div>
             <div class="card-body">
-              <form action="{{ route('subjects.store') }}" method="POST" class="form-horizontal">
+              <form action="{{ route('batchs.store') }}" method="POST" class="form-horizontal">
                 {{ csrf_field() }}
                 <div class="form-group row">
                   <label class="col-md-3 form-control-label">Department </label>
@@ -28,30 +28,16 @@
                 <div class="line"></div>
 
                 <div class="form-group row">
-                  <label class="col-md-3 form-control-label">Course Title</label>
+                  <label class="col-md-3 form-control-label">Batch Name</label>
                   <div class="col-md-9">
-                    <input type="text" name="course_name" class="form-control">
+                    <input type="text" name="name" class="form-control" placeholder="Batch Name">
                   </div>
                 </div>
                 <div class="line"></div>
                 <div class="form-group row">
-                  <label class="col-md-3 form-control-label">Course Code</label>
+                  <label class="col-md-3 form-control-label">Running Semister</label>
                   <div class="col-md-9">
-                    <input type="text" name="course_code" class="form-control">
-                  </div>
-                </div>
-                <div class="line"></div>
-                <div class="form-group row">
-                  <label class="col-md-3 form-control-label">Course Creadit</label>
-                  <div class="col-md-9">
-                    <input type="text" name="course_cradit" class="form-control">
-                  </div>
-                </div>
-                <div class="line"></div>
-                <div class="form-group row">
-                  <label class="col-md-3 form-control-label">Semister</label>
-                  <div class="col-md-9">
-                    <select name="semister" class="form-control" >
+                    <select name="running_semister" class="form-control" >
                       <option value="">--- Select ---</option>
                       <option value="1st">1<sup>st</sup></option>
                       <option value="2nd">2<sup>nd</sup></option>
@@ -70,15 +56,15 @@
                 </div>
                 <div class="line"></div>
                 <div class="form-group row">
-                  <label class="col-md-3 form-control-label">Type</label>
+                  <label class="col-md-3 form-control-label">Shift</label>
                   <div class="col-md-9">
                     <div class="custom-control custom-radio custom-control-inline">
-                      <input id="customRadioInline1" value="theroy" type="radio" name="theory_or_lab" class="custom-control-input">
-                      <label for="customRadioInline1" class="custom-control-label">Theroy</label>
+                      <input id="customRadioInline1" value="1" type="radio" name="shift_id" class="custom-control-input">
+                      <label for="customRadioInline1" class="custom-control-label">1<sup>st</sup></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                      <input id="customRadioInline2" value="lab" type="radio" name="theory_or_lab" class="custom-control-input">
-                      <label for="customRadioInline2" class="custom-control-label">Lab</label>
+                      <input id="customRadioInline2" value="2" type="radio" name="shift_id" class="custom-control-input">
+                      <label for="customRadioInline2" class="custom-control-label">2<sup>nd</sup></label>
                     </div>
                   </div>
                 </div>
@@ -94,7 +80,7 @@
                 <div class="line"></div>
                 <div class="form-group col-md-12 ">
                   <div class="pl-3 ml-auto">
-                    <a href="{{ route('subjects.index') }}" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                    <a href="{{ route('batchs.index') }}" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i> Back</a>
                     <button type="submit" class="btn btn-primary">Save</button>
                   </div>
                 </div>

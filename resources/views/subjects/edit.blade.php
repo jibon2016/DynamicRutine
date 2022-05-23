@@ -70,6 +70,19 @@
                   </div>
                 </div>
                 <div class="line"></div>
+                <div class="form-group row">
+                  <label class="col-md-3 form-control-label">Type</label>
+                  <div class="col-md-9">
+                    <div class="custom-control custom-radio custom-control-inline">
+                      <input id="customRadioInline1" {{$subject->theory_or_lab == 'theory' ? "checked": ""}} value="theroy" type="radio" name="theory_or_lab" class="custom-control-input">
+                      <label for="customRadioInline1" class="custom-control-label">Theroy</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                      <input id="customRadioInline2" value="lab" {{$subject->theory_or_lab == 'lab' ? "checked": ""}} type="radio" name="theory_or_lab" class="custom-control-input">
+                      <label for="customRadioInline2" class="custom-control-label">Lab</label>
+                    </div>
+                  </div>
+                </div>
 
                 <div class="line"></div>
                 <div class="form-group row">

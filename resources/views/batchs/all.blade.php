@@ -8,8 +8,8 @@
         <div class="col-lg-12 mb-5">
           <div class="card">
             <div class="card-header d-flex justify-content-between">
-                <h6 class="text-uppercase mb-0">Subjects</h6>
-                <a href="{{ route('subjects.create') }}" class="btn btn-blue text-white justify-content-end"><i class="fa-solid fa-plus"></i> Add</a>
+                <h6 class="text-uppercase mb-0">Batchs</h6>
+                <a href="{{ route('batchs.create') }}" class="btn btn-blue text-white justify-content-end"><i class="fa-solid fa-plus"></i> Add</a>
             </div>
             <div class="card-body">
               <table class="table card-text">
@@ -17,26 +17,24 @@
                   <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Curse Code</th>
-                    <th>Cradit</th>
-                    <th>Type</th>
-                    <th class="text-center" colspan="3">Action</th>
+                    <th>Department</th>
+                    <th>Shift</th>
+                    <th class="text-center" colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                     @php
                         $sl = 1;
                     @endphp
-                    @foreach ($subjects as $subject )
+                    @foreach ($batchs as $batch )
                       <tr>
                         <th scope="row">{{ $sl++ }}</th>
-                        <td>{{ $subject->course_name }}</td>
-                        <td>{{ $subject->course_code }}</td>
-                        <td>{{ $subject->course_cradit }}</td>
-                        <td>{{ $subject->theory_or_lab }}</td>
-                        <td><a href=" {{ route('subjects.edit', ['subject'=> $subject->id]) }} " class="btn btn-blue text-white"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                        <td>{{ $batch->name }}</td>
+                        <td>{{ $batch->department->name }}</td>
+                        <td>{{ $batch->shift_id == 1 ? '1st' : '2nd' }}</td>
+                        <td><a href=" {{ route('batchs.edit', ['batch'=> $batch->id]) }} " class="btn btn-blue text-white"><i class="fa-solid fa-pen-to-square"></i></a></td>
                         <td>
-                          <form method="POST" action=" {{ route('subjects.destroy', $subject->id) }} ">
+                          <form method="POST" action=" {{ route('batchs.destroy', $batch->id) }} ">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger text-white"><i class="fa-solid fa-trash-can"></i></button>

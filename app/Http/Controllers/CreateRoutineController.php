@@ -10,16 +10,19 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class CreateRoutineController extends Controller {
+class CreateRoutineController extends Controller
+{
 
-    public function generatePdf() {
+    public function generatePdf()
+    {
         // return view('routine.pdf');
         $pdf = PDF::loadView('routine.pdf');
         // return $pdf->download('invoice.pdf');
         return $pdf->stream();
     }
 
-    public function createRoutine(Request $request) {
+    public function createRoutine(Request $request)
+    {
         if ($this->checkAdminApprove($request)) {
             return redirect()->back()->withErrors(array('errors' => 'These Batchs are Panding to Admin approval.'));
         }$priods = array(
@@ -486,22 +489,25 @@ class CreateRoutineController extends Controller {
         return $pdf->stream();
     }
 
-    public function showRoutine() {
+    public function showRoutine()
+    {
 
-        $this->data['manu'] = 'Home';
+        $this->data['manu'] = 'Routine';
         $this->data['routines'] = Routine::where('year', 2022)
             ->get();
         return view('routine.show', $this->data);
     }
 
-    public function routineApprove($batch_no) {
+    public function routineApprove($batch_no)
+    {
         $routine = Routine::where('batch_no', $batch_no)->update(array('admin_aprove' => 1));
         if ($routine) {
             return Redirect::back()->with('message', 'Routine Approved');
         }
     }
 
-    public function addTeacher() {
+    public function addTeacher()
+    {
         $teacher = new Teacher();
         $teacher->department_id = 1;
         $teacher->name = "Mahabub Cse";
@@ -512,13 +518,15 @@ class CreateRoutineController extends Controller {
         return "Teacher Created successfully";
     }
 
-    public function generateRandomDay() {
+    public function generateRandomDay()
+    {
         $week = array("Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
         $rand = rand(0, 6);
         return $week[$rand];
     }
 
-    public function checkAdminApprove($request) {
+    public function checkAdminApprove($request)
+    {
         $session = $request->session;
         $batchs = $request->batch;
         foreach ($batchs as $batch) {

@@ -18,21 +18,42 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Department</th>
-                    <th>Subject</th>
-                    <th>Action</th>
+                    {{-- <th>Subject</th> --}}
+                    <th>Cradit</th>
+                    <th class="text-center" colspan="6">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                     @php
                         $sl = 1;
+                        $cradit= 0;
                     @endphp
                     @foreach ($teachers as $teacher )
+                    @php
+                        $cradit= 0;
+                    @endphp
                       <tr>
                         <th scope="row">{{ $sl++ }}</th>
                         <td>{{ $teacher->name }}</td>
                         <td>{{ $teacher->department->name }}</td>
-                        <td>{{ $teacher->subject->count() }}</td>
-                        <td><span class="badge text-white bg-{{ $teacher->active_status == 1 ? 'success' : 'danger' }}">{{ $teacher->active_status == 1 ? 'Active' : 'Deactive'}}</span></td>
+                        {{-- <td>{{ $teacher->subject->count() }}</td> --}}
+                        @foreach ( $teacher->subject as $subject )
+                            @php
+                              $cradit += $subject->course_cradit;
+                            @endphp
+                        @endforeach
+                        <td>{{ $cradit }}</td>
+                        <td><span class="badge text-white bg-{{ $teacher->active_status == 1 ? 'success' : 'danger' }}">{{ $teacher->active_status == 1 ? 'Active' : 'Deactive'}}</span>
+                        <td><a href=" {{ route('teachers.edit', ['teacher'=> $teacher->id]) }} " class="btn btn-blue text-white"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                        <td>
+                          <form action="{{ route('teachers.destroy', ['teacher'=> $teacher->id]) }} " method="POST">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger text-white"><i class="fa-solid fa-trash-can"></i></button>
+                          </form>
+                        
+                        </td>
+                        </td>
                         <td><a href="{{ route('addTeacherSub', ['id'=>$teacher->id, 'dept'=> $teacher->department_id]) }}" class="btn btn-primary">Add Subject</a></td>
                       </tr>
                     @endforeach

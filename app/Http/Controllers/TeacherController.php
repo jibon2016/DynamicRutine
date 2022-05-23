@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
 {
-    
 
     public function __construct()
     {
@@ -19,41 +18,37 @@ class TeacherController extends Controller
         $this->data['manu'] = 'Teacher';
     }
 
-
     public function index()
     {
         $this->data['teachers'] = Teacher::all();
-        return view('teachers.all', $this->data );
+        return view('teachers.all', $this->data);
     }
-
-
 
     public function create()
     {
         $this->data['departments'] = Department::where('active_status', 1)->get();
-        return view('teachers.create', $this->data );
+        return view('teachers.create', $this->data);
     }
-
-
 
     public function store(Request $request)
     {
         $fromdata = $request->all();
-        if($fromdata['active_status'] == 1 ){
+        if ($fromdata['active_status'] == 1) {
             $fromdata['active_status'] = 1;
-        }else{
+        } else {
             $fromdata['active_status'] = 0;
         }
         if (Teacher::create($fromdata)) {
-            $msg = "Subject Insterd Successfully";;
-        } 
+            $msg = "Subject Insterd Successfully";
+        }
         return redirect()->route('teachers.index');
     }
 
-
     public function edit($id)
     {
-        
+        $this->data['teacher'] = Teacher::find($id);
+        $this->data['departments'] = Department::where('active_status', 1)->get();
+        return view('teachers.edit', $this->data);
     }
 
     /**
@@ -65,7 +60,19 @@ class TeacherController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $teacher = Teacher::find($id);
+        $teacher->department_id = $request->department_id;
+        $teacher->name = $request->name;
+
+        if ($request->active_status == "on") {
+            $teacher->active_status = 1;
+        } else {
+            $teacher->active_status = 0;
+        }
+        if ($teacher->save()) {
+            $msg = "teacher Updated Successfully";
+        }
+        return redirect()->route('teachers.index');
     }
 
     /**
@@ -76,14 +83,16 @@ class TeacherController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Teacher::destroy($id);
+        return redirect()->route('teachers.index');
     }
 
-    public function addTeacherSub($id, $dept){
-        
+    public function addTeacherSub($id, $dept)
+    {
+
         $this->data['teacher'] = Teacher::find($id);
-        $this->data['subjects'] = Subject::where('department_id',$dept)
-        ->get();
+        $this->data['subjects'] = Subject::where('department_id', $dept)
+            ->get();
         return view('teachers.subtech', $this->data);
     }
 
@@ -94,21 +103,23 @@ class TeacherController extends Controller
     //     return response()->json(['subject'=> $subject]);
 // }
 
-    public function add_teacher_sub(Request $request){
+    public function add_teacher_sub(Request $request)
+    {
         $teacher = Teacher::find($request->teacher);
         $teacher->subject()->sync($request->subject);
         return redirect()->route('teachers.index');
     }
-    
-    public function routineTeacher(){
-        if(Auth::user()->role == 'teacher'){
+
+    public function routineTeacher()
+    {
+        if (Auth::user()->role == 'teacher') {
             $this->data['manu'] = 'Home';
             $teacher = Teacher::where('name', Auth::user()->name)->first();
-            $this->data['routines'] = Routine::where('year', 2022 )
-                                            ->where('teacher_id', $teacher->id)
-                                            ->where('admin_aprove', 1)
-                                            ->get();
-                                            
+            $this->data['routines'] = Routine::where('year', 2022)
+                ->where('teacher_id', $teacher->id)
+                ->where('admin_aprove', 1)
+                ->get();
+
             return view('teachers.showRoutine', $this->data);
         }
     }

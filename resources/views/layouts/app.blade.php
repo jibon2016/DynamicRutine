@@ -70,7 +70,7 @@
                 </div>
             </li>
             <li class="nav-item dropdown ml-auto"><a id="userInfo" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img src="{{ asset('asset') }}/img/avatar-6.jpg" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow"></a>
-                <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family">{{Auth::user()->name }}</strong><small>Web Developer</small></a>
+                <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family">{{Auth::user()->name }}</strong><small>DIU</small></a>
                 <div class="dropdown-divider"></div><a href="#" class="dropdown-item">Settings</a><a href="#" class="dropdown-item">Activity log       </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}"
@@ -96,10 +96,10 @@
                     <li class="sidebar-list-item">
                         <a href="{{ route('form') }}" class="sidebar-link text-muted @if($manu == 'Form') active @endif"><i class="o-survey-1 mr-3 text-gray"></i><span>Create Routine</span></a></li>
 
-                <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Routine</span></a>
+                <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted @if($manu == 'Routine') active @endif"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Routine</span></a>
                     <div id="pages" class="collapse">
                     <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
-                        <li class="sidebar-list-item"><a href="{{ url('showRoutine') }}" class="sidebar-link text-muted pl-lg-5">2022</a></li>
+                        <li class="sidebar-list-item"><a href="{{ url('showRoutine') }}" class="sidebar-link text-muted @if($manu == 'Routine') active @endif pl-lg-5">2022</a></li>
                         
                     </ul>
                     </div>
@@ -107,8 +107,9 @@
                 </ul>
                 <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">EXTRAS</div>
                 <ul class="sidebar-menu list-unstyled">
-                    <li class="sidebar-list-item"><a href="{{ route('subjects.index') }}" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Subject</span></a></li>
-                    <li class="sidebar-list-item"><a href="{{ route('teachers.index') }}" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Teacher</span></a></li>
+                    <li class="sidebar-list-item"><a href="{{ route('subjects.index') }}" class="sidebar-link text-muted @if($manu == 'Subject') active @endif"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Subjects</span></a></li>
+                    <li class="sidebar-list-item"><a href="{{ route('teachers.index') }}" class="sidebar-link text-muted @if($manu == 'Teacher') active @endif"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Teachers</span></a></li>
+                    <li class="sidebar-list-item"><a href="{{ route('batchs.index') }}" class="sidebar-link text-muted @if($manu == 'Batch') active @endif"><i class="o-table-content-1 mr-3 text-gray"></i><span>Batchs</span></a></li>
                 </ul>
             </div>
         @endif
