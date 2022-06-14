@@ -33,84 +33,84 @@
                     <div class="tab-pane fade show active" id="v-pills-1st" role="tabpanel" aria-labelledby="v-pills-home-tab">
                       @foreach ($subjects as $subject )
                         @if ($subject->semister == '1st')
-                          <label> <input type="checkbox" name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
+                          <label> <input type="checkbox" {{ $subject->teacher->where('id', $teacher->id)->count() == 1 ? 'checked': '' }}  name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
                         @endif
                       @endforeach
                     </div>
                     <div class="tab-pane" id="v-pills-2nd" role="tabpanel" aria-labelledby="v-pills-home-tab">
                       @foreach ($subjects as $subject )
                         @if ($subject->semister == '2nd')
-                          <label> <input type="checkbox" name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
+                          <label> <input type="checkbox" {{ $subject->teacher->where('id', $teacher->id)->count() == 1 ? 'checked': '' }}  name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
                         @endif
                       @endforeach
                     </div>
                     <div class="tab-pane" id="v-pills-3rd" role="tabpanel" aria-labelledby="v-pills-home-tab">
                       @foreach ($subjects as $subject )
                         @if ($subject->semister == '3rd')
-                          <label> <input type="checkbox" name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
+                          <label> <input type="checkbox" {{ $subject->teacher->where('id', $teacher->id)->count() == 1 ? 'checked': '' }}  name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
                         @endif
                       @endforeach
                     </div>
                     <div class="tab-pane" id="v-pills-4th" role="tabpanel" aria-labelledby="v-pills-home-tab">
                       @foreach ($subjects as $subject )
                         @if ($subject->semister == '4th')
-                          <label> <input type="checkbox" name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
+                          <label> <input type="checkbox" {{ $subject->teacher->where('id', $teacher->id)->count() == 1 ? 'checked': '' }}  name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
                         @endif
                       @endforeach
                     </div>
                     <div class="tab-pane" id="v-pills-5th" role="tabpanel" aria-labelledby="v-pills-home-tab">
                       @foreach ($subjects as $subject )
                         @if ($subject->semister == '5th')
-                          <label> <input type="checkbox" name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
+                          <label> <input type="checkbox" {{ $subject->teacher->where('id', $teacher->id)->count() == 1 ? 'checked': '' }}  name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
                         @endif
                       @endforeach
                     </div>
                     <div class="tab-pane" id="v-pills-6th" role="tabpanel" aria-labelledby="v-pills-home-tab">
                       @foreach ($subjects as $subject )
                         @if ($subject->semister == '6th')
-                          <label> <input type="checkbox" name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
+                          <label> <input type="checkbox" {{ $subject->teacher->where('id', $teacher->id)->count() == 1 ? 'checked': '' }}  name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
                         @endif
                       @endforeach
                     </div>
                     <div class="tab-pane" id="v-pills-7th" role="tabpanel" aria-labelledby="v-pills-home-tab">
                       @foreach ($subjects as $subject )
                         @if ($subject->semister == '7th')
-                          <label> <input type="checkbox" name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
+                          <label> <input type="checkbox" {{ $subject->teacher->where('id', $teacher->id)->count() == 1 ? 'checked': '' }}  name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
                         @endif
                       @endforeach
                     </div>
                     <div class="tab-pane" id="v-pills-8th" role="tabpanel" aria-labelledby="v-pills-home-tab">
                       @foreach ($subjects as $subject )
                         @if ($subject->semister == '8th')
-                          <label> <input type="checkbox" name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
+                          <label> <input type="checkbox" {{ $subject->teacher->where('id', $teacher->id)->count() == 1 ? 'checked': '' }}  name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
                         @endif
                       @endforeach
                     </div>
                     <div class="tab-pane" id="v-pills-9th" role="tabpanel" aria-labelledby="v-pills-home-tab">
                       @foreach ($subjects as $subject )
                         @if ($subject->semister == '9th')
-                          <label> <input type="checkbox" name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
+                          <label> <input type="checkbox" {{ $subject->teacher->where('id', $teacher->id)->count() == 1 ? 'checked': '' }}  name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
                         @endif
                       @endforeach
                     </div>
                     <div class="tab-pane" id="v-pills-10th" role="tabpanel" aria-labelledby="v-pills-home-tab">
                       @foreach ($subjects as $subject )
                         @if ($subject->semister == '10th')
-                          <label> <input type="checkbox" name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
+                          <label> <input type="checkbox" {{ $subject->teacher->where('id', $teacher->id)->count() == 1 ? 'checked': '' }}  name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
                         @endif
                       @endforeach
                     </div>
                     <div class="tab-pane" id="v-pills-11th" role="tabpanel" aria-labelledby="v-pills-home-tab">
                       @foreach ($subjects as $subject )
                         @if ($subject->semister == '11th')
-                          <label> <input type="checkbox" name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
+                          <label> <input type="checkbox" {{ $subject->teacher->where('id', $teacher->id)->count() == 1 ? 'checked': '' }}  name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
                         @endif
                       @endforeach
                     </div>
                     <div class="tab-pane" id="v-pills-12th" role="tabpanel" aria-labelledby="v-pills-home-tab">
                       @foreach ($subjects as $subject )
                         @if ($subject->semister == '12th')
-                          <label> <input type="checkbox" name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
+                          <label> <input type="checkbox" {{ $subject->teacher->where('id', $teacher->id)->count() == 1 ? 'checked': '' }}  name="subject[]" value=" {{ $subject->id }} "> {{ $subject->course_name }} </label><br>
                         @endif
                       @endforeach
                     </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\CreateRoutineController;
+use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoutineFormController;
 use App\Http\Controllers\SubjectController;
@@ -23,6 +24,7 @@ Route::post('/session', array(RoutineFormController::class, 'session'));
 Route::post('/createRoutine', array(CreateRoutineController::class, 'createRoutine'));
 Route::get('/showRoutine', array(CreateRoutineController::class, 'showRoutine'));
 Route::get('/routineApprove/{batch_no}', array(CreateRoutineController::class, 'routineApprove'))->name('routineApprove');
+Route::get('/downloadPdf/{batch_no}', [DownloadController::class, 'download_routine'])->name('download.pdf');
 
 //Subjects Routes
 Route::resource('subjects', SubjectController::class);

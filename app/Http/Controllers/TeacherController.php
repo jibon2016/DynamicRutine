@@ -6,6 +6,8 @@ use App\Models\Department;
 use App\Models\Routine;
 use App\Models\Subject;
 use App\Models\Teacher;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,6 +41,13 @@ class TeacherController extends Controller
             $fromdata['active_status'] = 0;
         }
         if (Teacher::create($fromdata)) {
+            User::insert([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'role' => 'teacher',
+                'created_at' => Carbon::now()
+            ]);
             $msg = "Subject Insterd Successfully";
         }
         return redirect()->route('teachers.index');
@@ -81,9 +90,9 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Teacher $teacher)
     {
-        Teacher::destroy($id);
+        $teacher->delete();
         return redirect()->route('teachers.index');
     }
 

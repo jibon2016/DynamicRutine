@@ -12,7 +12,7 @@
                 <a href="{{ route('teachers.index') }}" class="btn btn-blue text-white justify-content-end"><i class="fa-solid fa-arrow-left"></i> Back</a>
             </div>
             <div class="card-body">
-              <form action="{{ route('teachers.store') }}" method="POST" class="form-horizontal">
+              <form autocomplete="off" action="{{ route('teachers.store') }}" method="POST" class="form-horizontal">
                 {{ csrf_field() }}
                 <div class="form-group row">
                   <label class="col-md-3 form-control-label">Department </label>
@@ -31,6 +31,30 @@
                   <label class="col-md-3 form-control-label">Teacher Name</label>
                   <div class="col-md-9">
                     <input type="text" name="name" class="form-control" placeholder="Teacher Name">
+                  </div>
+                </div>
+                <div class="line"></div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 form-control-label">Teacher Login Email</label>
+                  <div class="col-md-9">
+                    <input type="email" name="email" class="form-control" placeholder="Teacher Login Email">
+                  </div>
+                </div>
+                <div class="line"></div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 form-control-label">Teacher Password</label>
+                  <div class="col-md-9">
+                    <input type="password" name="password" class="form-control" placeholder="Teacher Login Password">
+                  </div>
+                </div>
+                <div class="line"></div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 form-control-label">Teacher Confirm Password</label>
+                  <div class="col-md-9">
+                    <input type="password" name="confirm_password" class="form-control" placeholder="Teacher Confirm Password">
                   </div>
                 </div>
                 <div class="line"></div>

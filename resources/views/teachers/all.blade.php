@@ -49,7 +49,7 @@
                           <form action="{{ route('teachers.destroy', ['teacher'=> $teacher->id]) }} " method="POST">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-danger text-white"><i class="fa-solid fa-trash-can"></i></button>
+                            <button type="submit" onclick="return confirm('Are you sure!');" class="btn btn-danger text-white"><i class="fa-solid fa-trash-can"></i></button>
                           </form>
                         
                         </td>

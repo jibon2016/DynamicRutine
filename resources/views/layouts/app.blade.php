@@ -11,7 +11,7 @@
         <!-- Bootstrap CSS-->
         <link rel="stylesheet" href="{{ asset('asset') }}/vendor/bootstrap/css/bootstrap.min.css">
         <!-- Font Awesome CSS-->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" >
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
         <!-- Google fonts - Popppins for copy-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,800">
@@ -30,7 +30,7 @@
     <body>
         <!-- navbar-->
         <header class="header">
-        <nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow"><a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a href="index.html" class="navbar-brand font-weight-bold text-uppercase text-base">Dynamic Routine System</a>
+        <nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow"><a href="" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a href="index.html" class="navbar-brand font-weight-bold text-uppercase text-base">Dynamic Routine System</a>
             <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
             <li class="nav-item">
                 <form id="searchForm" class="ml-auto d-none d-lg-block">
@@ -132,7 +132,7 @@
         @endif
 
         @yield('content')
-        </div>
+    </div>
 
         
         <!-- JavaScript files-->

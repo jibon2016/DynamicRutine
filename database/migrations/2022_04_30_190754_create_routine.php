@@ -17,9 +17,9 @@ class CreateRoutine extends Migration
             $table->id();
             $table->bigInteger('batch_no');
             $table->foreignId('department_id')->unsigned();
-            $table->foreign('department_id')->references('id')->on('departments');
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
             $table->foreignId('teacher_id')->unsigned()->nullable();
-            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
             $table->string('priod_time')->nullable();
             $table->string('priod');
             $table->string('day');

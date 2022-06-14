@@ -97,6 +97,9 @@ class CreateRoutineController extends Controller
             }
 
             // fixed a class room for this batch
+            if (empty($classRooms)) {
+                dd( Routine::where('batch_no', $newBatchNo)->pluck('day')->groupBy('day')->get() );
+            }
             $key = array_rand($classRooms);
             $this_batch_classRoom = $classRooms[$key];
             unset($classRooms[$key]);
@@ -346,6 +349,9 @@ class CreateRoutineController extends Controller
                 $subteach = array_unique($subteach);
 
             }
+            // if (empty($subteach)) {
+            //     return redirect()->back()->withErrors(array('errors' => 'Teacher selected no subject'));
+            // }
             foreach ($subteach as $key => $sub) {
                 $subject = Subject::where('course_code', $key)->first();
                 if ($subject->teacher->count() > 0) {
@@ -485,9 +491,11 @@ class CreateRoutineController extends Controller
 
             $html .= $htmlTable;
         } //End of Batchs
-        $pdf = PDF::loadHTML($html);
-        return $pdf->stream();
+        
+        return PDF::loadHTML($html)->save(public_path()."/routine"."/". $newBatchNo.".pdf")->stream('routine.pdf');
+    
     }
+
 
     public function showRoutine()
     {
