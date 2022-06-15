@@ -349,9 +349,12 @@ class CreateRoutineController extends Controller
                 $subteach = array_unique($subteach);
 
             }
-            // if (empty($subteach)) {
-            //     return redirect()->back()->withErrors(array('errors' => 'Teacher selected no subject'));
-            // }
+            // echo "<pre>";
+            // print_r($subteach);
+            // die;
+            if (empty($subteach)) {
+                return redirect()->back()->withErrors(array('errors' => $run_semister .' semister not have Subject!'));
+            }
             foreach ($subteach as $key => $sub) {
                 $subject = Subject::where('course_code', $key)->first();
                 if ($subject->teacher->count() > 0) {

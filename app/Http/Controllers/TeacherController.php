@@ -56,6 +56,8 @@ class TeacherController extends Controller
     public function edit($id)
     {
         $this->data['teacher'] = Teacher::find($id);
+        $this->data['user_data'] = User::where('name', $this->data['teacher']->name )->first();
+        // dd($this->data['user_data']);
         $this->data['departments'] = Department::where('active_status', 1)->get();
         return view('teachers.edit', $this->data);
     }
@@ -69,6 +71,7 @@ class TeacherController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $teacher = Teacher::find($id);
         $teacher->department_id = $request->department_id;
         $teacher->name = $request->name;
@@ -77,6 +80,18 @@ class TeacherController extends Controller
             $teacher->active_status = 1;
         } else {
             $teacher->active_status = 0;
+        }
+        if ($request->login_details == "on") {
+            $user = User::where('name', $request->old_name)->first();
+            $email = $request->input('email');
+            $user->updateOrCreate([
+                'email' => $email,
+            ],[
+                'name' => $request->name,
+                'password' => bcrypt($request->password),
+                'role' => 'teacher',
+                'updated_at' => Carbon::now()
+            ]);
         }
         if ($teacher->save()) {
             $msg = "teacher Updated Successfully";

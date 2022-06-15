@@ -35,12 +35,49 @@
                   </div>
                 </div>
                 <div class="line"></div>
+
+
+                <div class="form-group row">
+                  <label class="col-md-3 form-control-label">Change Login details</label>
+                  <div class="col-md-9">
+                    <label class="checkbox-inline">
+                      <input id="logincheckbox" type="checkbox" name="login_details"> Change Details
+                    </label>
+                  </div>
+                </div>
+
+                <div class="d-none" id="loginDetails">
+                  <div class="form-group row">
+                    <label class="col-md-3 form-control-label">Teacher Login Email</label>
+                    <div class="col-md-9">
+                      <input type="email" name="email" value="{{$user_data == null ? '' : $user_data->email }}" class="form-control" placeholder="{{ $user_data == null ? 'Teacher don\'t have email' : '' }}">
+                    </div>
+                  </div>
+                  <div class="line"></div>
+                  
+                  <div class="form-group row">
+                    <label class="col-md-3 form-control-label">Teacher Password</label>
+                    <div class="col-md-9">
+                      <input type="password" name="password" class="form-control" placeholder="Teacher Login Password">
+                    </div>
+                  </div>
+                  <div class="line"></div>
+
+                  <div class="form-group row">
+                    <label class="col-md-3 form-control-label">Teacher Confirm Password</label>
+                    <div class="col-md-9">
+                      <input type="password" name="confirm_password" class="form-control" placeholder="Teacher Confirm Password">
+                    </div>
+                  </div>
+                  <div class="line"></div>
+                </div>
                 
                 <div class="form-group row">
                   <label class="col-md-3 form-control-label">Active Status</label>
                   <div class="col-md-9">
                     <label class="checkbox-inline">
                       <input {{$teacher->active_status == 1 ? "checked": ""}}  id="inlineCheckbox1" type="checkbox" name="active_status"> Active
+                      <input  type="hidden" name="old_name" value="{{$teacher->name }}"> Active
                     </label>
                   </div>
                 </div>

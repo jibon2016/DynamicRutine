@@ -113,6 +113,15 @@ $(document).ready(function(){
   })
 
 
+  $('#logincheckbox').click(function(){
+    if($(this).prop("checked") == true){
+      $('#loginDetails').removeClass('d-none').addClass('d-block');
+    }
+    else if($(this).prop("checked") == false){
+      $('#loginDetails').removeClass('d-block').addClass('d-none');
+    }
+  });
+
 
 
 
@@ -171,3 +180,9 @@ $(document).ready(function(){
 
 
 });
+
+
+  var logincheckbox = document.getElementById("logincheckbox");  
+  if (logincheckbox.checked == true){  
+    console.log('checked');
+  }   
