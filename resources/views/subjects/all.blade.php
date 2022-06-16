@@ -18,6 +18,7 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Curse Code</th>
+                    <th>Semister</th>
                     <th>Cradit</th>
                     <th>Type</th>
                     <th class="text-center" colspan="3">Action</th>
@@ -33,6 +34,7 @@
                         <td>{{ $subject->course_name }}</td>
                         <td>{{ $subject->course_code }}</td>
                         <td>{{ $subject->course_cradit }}</td>
+                        <td>{{ $subject->semister }}</td>
                         <td>{{ $subject->theory_or_lab }}</td>
                         <td><a href=" {{ route('subjects.edit', ['subject'=> $subject->id]) }} " class="btn btn-blue text-white"><i class="fa-solid fa-pen-to-square"></i></a></td>
                         <td>

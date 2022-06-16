@@ -74,7 +74,7 @@
                   <label class="col-md-3 form-control-label">Type</label>
                   <div class="col-md-9">
                     <div class="custom-control custom-radio custom-control-inline">
-                      <input id="customRadioInline1" {{$subject->theory_or_lab == 'theory' ? "checked": ""}} value="theroy" type="radio" name="theory_or_lab" class="custom-control-input">
+                      <input id="customRadioInline1" {{$subject->theory_or_lab == 'theory' ? "checked": ""}} value="theory" type="radio" name="theory_or_lab" class="custom-control-input">
                       <label for="customRadioInline1" class="custom-control-label">Theroy</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">

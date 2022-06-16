@@ -49,6 +49,7 @@
                         @endforeach </td>
                         <td><a href=" {{ route('routineApprove', ['batch_no'=> $routine->batch_no ]) }} " class="btn btn-success {{ $routine->admin_aprove == 1 ? 'disabled' : '' }} text-white">Approve</a>
                           <a href="{{ route('download.pdf', $routine->batch_no) }}" class="btn btn-primary text-white">Download</a>
+                          <a href="{{ route('delete.routine', $routine->batch_no) }}" class="btn btn-danger text-white">Delete</a>
                         </td>
                       </tr>
                     @endforeach

@@ -8,6 +8,7 @@ use App\Models\Subject;
 use App\Models\Teacher;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class CreateRoutineController extends Controller
@@ -25,7 +26,8 @@ class CreateRoutineController extends Controller
     {
         if ($this->checkAdminApprove($request)) {
             return redirect()->back()->withErrors(array('errors' => 'These Batchs are Panding to Admin approval.'));
-        }$priods = array(
+        }
+        $priods = array(
             "1st" => "09:00-10:20",
             "2nd" => "10:20-11:50",
             "3rd" => "11:50-12:50",
@@ -64,7 +66,7 @@ class CreateRoutineController extends Controller
 
             //how many subject of this semister
             $subjects = Subject::where('department_id', $dept)
-                ->where('semister', $run_semister)
+                ->where('semister', $run_semister)   
                 ->where('active_status', 1)
                 ->get();
             $formData['semister'] = $run_semister;
@@ -92,18 +94,56 @@ class CreateRoutineController extends Controller
                 $total_day = count($week);
             }
 
-            if ($total_day > 4) {
+            if ($total_day > 4 ) {
                 array_pop($week);
             }
 
             // fixed a class room for this batch
-            if (empty($classRooms)) {
-                dd( Routine::where('batch_no', $newBatchNo)->pluck('day')->groupBy('day')->get() );
+            if(empty($classRooms)){
+                $classRooms = $request->classRoom;
+                $key = array_rand($classRooms);
+                $this_batch_classRoom = $classRooms[$key];
+                unset($classRooms[$key]);
+                $classRooms = array_values($classRooms);
+                
+                foreach ($week as $day_key=> $day) {
+                    DB::statement("SET SQL_MODE=''");
+                    $classs = Routine::where('batch_no', $newBatchNo)->where('day', $day)->get() ;
+
+                    foreach ($classs as $class) {
+                        if ($class->room_no == $this_batch_classRoom) {
+                            unset($week[$day_key]);
+                            while($total_day > count($week)){
+                                echo $text = $this->generateRandomDay();
+                                if($day == $text ){
+                                    while(true){
+                                        $text2 = $this->generateRandomDay();
+                                        if($day != $text2 ){
+                                            array_push($week, $text2);
+                                            $week = array_unique($week);
+                                            array_values($week);
+                                            break;
+                                        }
+                                    }
+                                }else{
+                                    array_push($week, $text);
+                                    $week = array_unique($week);
+                                    array_values($week);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }else{
+                $key = array_rand($classRooms);
+                $this_batch_classRoom = $classRooms[$key];
+                unset($classRooms[$key]);
+                $classRooms = array_values($classRooms);
             }
-            $key = array_rand($classRooms);
-            $this_batch_classRoom = $classRooms[$key];
-            unset($classRooms[$key]);
-            $classRooms = array_values($classRooms);
+            if ($total_day > 4 ) {
+                array_pop($week);
+            }
             $formData['room_no'] = $this_batch_classRoom;
             $formData['batch'] = $batch;
 
@@ -253,6 +293,7 @@ class CreateRoutineController extends Controller
             $allTheorySub = $allTheorySub->all();
             $allLabSub = $allLabSub->all();
 
+            
             //Loop week all day
             $count = 1;
             foreach ($week as $key => $day) {
@@ -268,14 +309,16 @@ class CreateRoutineController extends Controller
                         $htmlTableMiddle .= '<td>Break</td>';
                         continue;
                     }
-                    if (empty($allTheorySub)) {
-                        $htmlTableMiddle .= '<td></td>';
-                        continue;
-                    }
+                    
 
                     //A week Second day is Lab Class
                     if ($count == 2) {
+                        
                         if (empty($allLabSub)) {
+                            if ($key == '2nd') {
+                                $htmlTableMiddle .= '';
+                                continue;
+                            }
                             $htmlTableMiddle .= '<td></td>';
                             continue;
                         }
@@ -307,6 +350,10 @@ class CreateRoutineController extends Controller
                         }
 
                     } else {
+                        if (empty($allTheorySub)) {
+                            $htmlTableMiddle .= '<td></td>';
+                            continue;
+                        }
                         $key1 = array_rand($allTheorySub);
                         $priod_sub[] = $allTheorySub[$key1];
                         $new = array_count_values($priod_sub);
@@ -326,7 +373,6 @@ class CreateRoutineController extends Controller
                 if ($count == 2) {
                     $htmlTableMiddle .= '</tr>';
                 } else {
-
                     $htmlTableMiddle .= '</tr>';
                 }
                 $count += 1;
@@ -349,9 +395,6 @@ class CreateRoutineController extends Controller
                 $subteach = array_unique($subteach);
 
             }
-            // echo "<pre>";
-            // print_r($subteach);
-            // die;
             if (empty($subteach)) {
                 return redirect()->back()->withErrors(array('errors' => $run_semister .' semister not have Subject!'));
             }
@@ -403,6 +446,7 @@ class CreateRoutineController extends Controller
                             }
                         }
                     }
+                    
 
                     foreach ($data1 as $key => $value) {
                         if ($key == $dataSub) {
@@ -412,7 +456,7 @@ class CreateRoutineController extends Controller
                             }
                         }
                     }
-
+                    //Store Data
                     if (!Routine::create($formData)) {
                         return "Data Not Stored";
                     }
@@ -476,8 +520,10 @@ class CreateRoutineController extends Controller
             foreach ($allTheorySub as $i => $value) {
                 unset($allTheorySub[$i]);
             }
-            foreach ($priod_sub as $i => $value) {
-                unset($priod_sub[$i]);
+            if (isset($priod_sub) ) {
+                foreach ($priod_sub as $i => $value) {
+                    unset($priod_sub[$i]);
+                }
             }
             foreach ($subteach as $i => $value) {
                 unset($subteach[$i]);
@@ -488,13 +534,17 @@ class CreateRoutineController extends Controller
             foreach ($data1 as $i => $value) {
                 unset($data1[$i]);
             }
-            foreach ($lab_no as $i => $value) {
-                unset($lab_no[$i]);
+            if (isset($lab_no)) {
+                foreach ($lab_no as $i => $value) {
+                    unset($lab_no[$i]);
+                }
             }
 
             $html .= $htmlTable;
         } //End of Batchs
         
+        
+
         return PDF::loadHTML($html)->save(public_path()."/routine"."/". $newBatchNo.".pdf")->stream('routine.pdf');
     
     }
@@ -540,6 +590,9 @@ class CreateRoutineController extends Controller
     {
         $session = $request->session;
         $batchs = $request->batch;
+        if (empty($batchs)) {
+            return true;
+        }
         foreach ($batchs as $batch) {
             if (Routine::where('batch', $batch)
                 ->where('session', $session)

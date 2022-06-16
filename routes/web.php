@@ -25,6 +25,7 @@ Route::post('/createRoutine', array(CreateRoutineController::class, 'createRouti
 Route::get('/showRoutine', array(CreateRoutineController::class, 'showRoutine'));
 Route::get('/routineApprove/{batch_no}', array(CreateRoutineController::class, 'routineApprove'))->name('routineApprove');
 Route::get('/downloadPdf/{batch_no}', [DownloadController::class, 'download_routine'])->name('download.pdf');
+Route::get('/deleteRoutine/{batch_no}', [DownloadController::class, 'delete_routine'])->name('delete.routine');
 
 //Subjects Routes
 Route::resource('subjects', SubjectController::class);

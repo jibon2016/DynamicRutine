@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Routine;
 use Illuminate\Http\Request;
 use File;
 use Repsonse;
@@ -13,5 +14,11 @@ class DownloadController extends Controller
     {
         $filepath = public_path('routine/'. $batch_no. ".pdf");
         return Response::download($filepath); 
+    }
+
+    public function delete_routine ($batch_no)
+    {
+        Routine::where('batch_no', $batch_no)->delete();
+        return redirect()->back()->with('message', 'Routine Deleted');
     }
 }
