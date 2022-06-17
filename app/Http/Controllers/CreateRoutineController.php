@@ -27,12 +27,7 @@ class CreateRoutineController extends Controller
         if ($this->checkAdminApprove($request)) {
             return redirect()->back()->withErrors(array('errors' => 'These Batchs are Panding to Admin approval.'));
         }
-        $priods = array(
-            "1st" => "09:00-10:20",
-            "2nd" => "10:20-11:50",
-            "3rd" => "11:50-12:50",
-            "4th" => "12:50-01:20",
-        );
+    
 
         $dept = $request->department;
         $shift = $request->shift;
@@ -41,6 +36,24 @@ class CreateRoutineController extends Controller
         $teacher = $request->teacher;
         $classRooms = $request->classRoom;
         $lab = $request->lab;
+        
+        if ($shift == 2 ) {
+            $priods = array(
+                "1st" => "06:00-06:50",
+                "2nd" => "06:50-07:40",
+                "3rd" => "07:40-08:30",
+                "4th" => "08:30-09:20",
+            );
+        }else{
+            $priods = array(
+                "1st" => "09:00-10:20",
+                "2nd" => "10:20-11:50",
+                "3rd" => "11:50-12:50",
+                "4th" => "12:50-01:20",
+            );
+        }
+        
+
 
         $this->data['batchs'] = $batchs;
         $html = '';
@@ -266,10 +279,10 @@ class CreateRoutineController extends Controller
                     <thead>
                         <tr>
                             <td>Time & Day</td>
-                            <td>09:00-10:20</td>
-                            <td>10:30-11:50</td>
-                            <td>11:50-12:00</td>
-                            <td>12:00-01:20</td>
+                            <td>'. $priods['1st'] .'</td>
+                            <td>'. $priods['2nd'] .'</td>
+                            <td>'. $priods['3rd'] .'</td>
+                            <td>'. $priods['4th'] .'</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -305,9 +318,11 @@ class CreateRoutineController extends Controller
 
                 //In a day loop all Priod
                 foreach ($priods as $key => $priod) {
-                    if ($key == '3rd') {
-                        $htmlTableMiddle .= '<td>Break</td>';
-                        continue;
+                    if ($shift == 1 ) {
+                        if ($key == '3rd') {
+                            $htmlTableMiddle .= '<td>Break</td>';
+                            continue;
+                        }
                     }
                     
 
@@ -390,6 +405,8 @@ class CreateRoutineController extends Controller
             </tr>
             </thead>
             <tbody>';
+
+
             foreach ($subjects as $subject) {
                 $subteach[$subject->course_code] = $subject->course_name;
                 $subteach = array_unique($subteach);
@@ -400,7 +417,17 @@ class CreateRoutineController extends Controller
             }
             foreach ($subteach as $key => $sub) {
                 $subject = Subject::where('course_code', $key)->first();
-                if ($subject->teacher->count() > 0) {
+
+                if ($subject->theory_or_lab == 'lab') {
+                    if (!is_null($subject->combine_lt)) {
+                        if (!empty($data1)) {
+                            $subject_code_lab = $subject->where('combine_lt', $subject->combine_lt)->where('theory_or_lab', 'lab')->pluck('course_code');
+                            $subject_code_thery = $subject->where('combine_lt', $subject->combine_lt)->where('theory_or_lab', 'theory')->pluck('course_code');
+                        }
+                    }
+
+                }else if ($subject->teacher->count() > 0) {
+
                     foreach ($subject->teacher as $teacher) {
                         $teacherall[$teacher->id] = $teacher->name;
                     }
@@ -439,10 +466,12 @@ class CreateRoutineController extends Controller
                     }
 
                     $formData['lab_no'] = null;
-                    foreach ($lab_no as $key => $value) {
-                        if ($key == $dataSub) {
-                            if ($subject->theory_or_lab == 'lab') {
-                                $formData['lab_no'] = $value;
+                    if (!empty($lab_no)) {
+                        foreach ($lab_no as $key => $value) {
+                            if ($key == $dataSub) {
+                                if ($subject->theory_or_lab == 'lab') {
+                                    $formData['lab_no'] = $value;
+                                }
                             }
                         }
                     }
