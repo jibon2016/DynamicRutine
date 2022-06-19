@@ -82,9 +82,9 @@ class TeacherController extends Controller
             $teacher->active_status = 0;
         }
         if ($request->login_details == "on") {
-            $user = User::where('name', $request->old_name)->first();
+            // $user = User::where('name', $request->old_name)->first();
             $email = $request->input('email');
-            $user->updateOrCreate([
+            User::updateOrCreate([
                 'email' => $email,
             ],[
                 'name' => $request->name,

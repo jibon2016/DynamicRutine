@@ -406,7 +406,7 @@ class CreateRoutineController extends Controller
             </thead>
             <tbody>';
 
-
+                $subjects = $subjects->sortBy('course_code');
             foreach ($subjects as $subject) {
                 $subteach[$subject->course_code] = $subject->course_name;
                 $subteach = array_unique($subteach);
@@ -417,35 +417,48 @@ class CreateRoutineController extends Controller
             }
             foreach ($subteach as $key => $sub) {
                 $subject = Subject::where('course_code', $key)->first();
-
+                
                 if ($subject->theory_or_lab == 'lab') {
                     if (!is_null($subject->combine_lt)) {
                         if (!empty($data1)) {
+                            
                             $subject_code_lab = $subject->where('combine_lt', $subject->combine_lt)->where('theory_or_lab', 'lab')->pluck('course_code');
                             $subject_code_thery = $subject->where('combine_lt', $subject->combine_lt)->where('theory_or_lab', 'theory')->pluck('course_code');
                         }
                     }
-
                 }else if ($subject->teacher->count() > 0) {
-
                     foreach ($subject->teacher as $teacher) {
                         $teacherall[$teacher->id] = $teacher->name;
                     }
                     $teacherkey = array_rand($teacherall);
+                    $teacher_check = [];
+                    if(isset($teacher_check[$teacherkey])){
+                        if ($teacher_check[$teacherkey] < 2) {
+                            unset($teacherall[$teacherkey]);
+                            while($teacherkey != $teacherkey ){
+                                $teacherkey = array_rand($teacherall);
+                            }
+                        }
+                        $teacher_check[$teacherkey] += 1;
+                    }
                     $teacherName = $teacherall[$teacherkey];
                     $data1[$key] = $teacherkey;
-
                 } else {
                     $teacherName = 'No Teacher';
                     $data1[$key] = '';
                 }
-
+                if(isset($teacher_check[$teacherkey])){
+                    $teacher_check[$teacherkey] += 1;
+                }
                 $htmlTable .= '
                 <tr>
                     <td>' . $key . '</td>
                     <td>' . $sub . '</td>
                     <td>' . $teacherName . '</td>
                 </tr>';
+                foreach ($teacherall as $i => $value) {
+                    unset($teacherall[$i]);
+                }
             }
 
             //Data insert into table
