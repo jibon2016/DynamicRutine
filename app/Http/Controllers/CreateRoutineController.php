@@ -430,6 +430,10 @@ class CreateRoutineController extends Controller
                     foreach ($subject->teacher as $teacher) {
                         $teacherall[$teacher->id] = $teacher->name;
                     }
+
+
+
+
                     $teacherkey = array_rand($teacherall);
                     $teacher_check = [];
                     if(isset($teacher_check[$teacherkey])){
@@ -441,6 +445,10 @@ class CreateRoutineController extends Controller
                         }
                         $teacher_check[$teacherkey] += 1;
                     }
+
+
+                    
+
                     $teacherName = $teacherall[$teacherkey];
                     $data1[$key] = $teacherkey;
                 } else {
@@ -586,7 +594,6 @@ class CreateRoutineController extends Controller
         } //End of Batchs
         
         
-
         return PDF::loadHTML($html)->save(public_path()."/routine"."/". $newBatchNo.".pdf")->stream('routine.pdf');
     
     }
@@ -645,5 +652,6 @@ class CreateRoutineController extends Controller
         }
         return false;
     }
+
 
 }

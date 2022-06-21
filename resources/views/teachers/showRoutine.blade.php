@@ -35,13 +35,23 @@
                   {{$batch->first()->batch}}
                 <table border="1" class="mb-5" style="width: 100%;">
                   <thead class="text-center">
+                    @if ($batch->unique('shift')->first()->shift == '1')
                       <tr>
-                          <td>Time & Day</td>
-                          <td>09:00-10:20</td>
-                          <td>10:30-11:50</td>
-                          <td>11:50-12:00</td>
-                          <td>12:00-01:20</td>
+                        <td>Time & Day</td>
+                        <td>09:00-10:20</td>
+                        <td>10:30-11:50</td>
+                        <td>11:50-12:00</td>
+                        <td>12:00-01:20</td>
                       </tr>
+                    @else
+                      <tr>
+                        <td>Time & Day</td>
+                        <td>06:00-06:50</td>
+                        <td>06:50-07:40</td>
+                        <td>07:40-08:30</td>
+                        <td>08:30-09:20</td>
+                      </tr>
+                    @endif
                       <tr>
                         <td></td>
                         <td>1<sup>st</sup></td>
